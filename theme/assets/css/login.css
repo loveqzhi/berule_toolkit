@@ -1,0 +1,57 @@
+.admin-section {margin-top: 80px;}
+
+.login {
+	width: 500px;
+	margin: 0 auto;
+	/*padding-top: 60px;
+	background: url(../images/login-logo.png) no-repeat top left;*/
+}
+.login form {
+	padding: 15px 20px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	background-color: #f2f2f2;
+	overflow: hidden;
+}
+.login form span {display: block;margin-bottom: 10px;font-size: 120%;color: #333;}
+.login form .form-control {padding: 0 10px;height: 45px;}
+.login form label {font-weight: normal;}
+.login a {
+	display: block;
+	margin-top: 10px;
+	color: #666;
+	text-decoration: underline;
+}
+.login a:hover {color: #f30;}
+.button {
+	display: inline-block;
+	background-color: #ff5562;
+	color: #fff !important;
+	box-shadow: 0 3px 0 0 #f12938, 0 -3px 0 0 #ff5562;
+	border: 1px solid #ff5562;
+	padding: 10px 15px;
+	line-height: 15px;
+	vertical-align: bottom;
+	text-align: center;
+	text-decoration: none !important;
+	font-weight: bold;
+	text-shadow: 0 -2px 0 rgba(0,0,0,0.2);
+	border-radius: 5px;
+	outline: none;
+}
+.login form .login-button {float: right;}
+.login >h1{height:60px;}
+.admin-footer {
+	width: 500px;
+	margin: 100px auto 0;
+	text-align: center;
+	color: #999;
+}
+.admin-footer a {
+	display: inline-block;
+	margin-top: 10px;
+	padding: 0 10px;
+	border-right: 1px solid #999;
+	color: #999;
+}
+.admin-footer .last-link {border-style: none;}

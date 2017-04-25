@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>编辑短信接口</title>
+<?php require_once 'common.html';?>
+</head>
+<body>
+<?php require_once 'header.html';?>
+        <div class="wrap">
+        <?php require_once 'admin-sidebar.html';?>
+            <div class="main-content">
+            
+                <div class="page-content">
+                    
+                    <div class="page-header">
+                        <h1>编辑短信接口</h1>
+                    </div><!-- /.page-header -->
+                    
+                    <div class="form-horizontal">
+                        <form method="post" action="/sms/setting/update" id="sms-add">
+                            <input type="hidden" name="field_user_sms[<?php echo $nownumber;?>][name]" value="<?php echo $sms['name'];?>">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">企业ID</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="text" name="field_user_sms[<?php echo $nownumber;?>][userid]" class="form-control" value="<?php echo $sms['userid'];?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">账号</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="text" id="account" name="field_user_sms[<?php echo $nownumber;?>][account]" class="form-control" value="<?php echo $sms['account'];?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">密码</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="password" id="password" name="field_user_sms[<?php echo $nownumber;?>][password]" class="form-control" placeholder="密码" value="<?php echo $sms['password'];?>"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">签名</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="text" id="sign" name="field_user_sms[<?php echo $nownumber;?>][sign]" class="form-control" value="<?php echo $sms['sign'];?>"/>
+                                    </div>
+                                </div>
+                            </div>                            
+                            <div class="clearfix form-actions">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="button" class="btn btn-btn sms-add">
+                                        <i class="fa fa-check"></i>
+                                        保 存 
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!-- /.form-horizontal -->
+
+                </div>
+            
+            </div>
+            
+            <div class="clearfix"></div>
+        </div>
+        
+        <?php require_once 'footer.html';?>
+
+        <script type="text/javascript">
+            $(function(){
+                $(".sms-add").click(function(){
+                    var sign = $("#sign").val();
+                    var account = $("#account").val();
+                    var password = $("#password").val();
+                    if(sign=='') {
+                        alert('签名必须填写');
+                    }
+                    if(account=='') {
+                        alert('账号必须填写');
+                    }
+                    if(password=='') {
+                        alert('密码必须填写');
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "/sms/setting/add",
+                        data: $("#sms-add").serialize(),
+                        dataType: "json",
+                        success: function(data){
+                          if (data.status=="success") {
+                              location.href="/sms/setting";
+                          } else {
+                             alert(data.msg);
+                             return false;
+                          }
+                        }
+                    });
+                });
+            });
+        </script>

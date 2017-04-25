@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<?php require_once 'common.html';?>
+    <title>应用审核</title>
+</head>
+<body>
+<?php require_once 'header.html';?>
+        <div class="wrap">
+        <?php require_once 'admin-sidebar.html';?>
+
+            <div class="main-content">
+            
+                <div class="page-content">
+                    
+                    <div class="page-header">
+                        <h1>应用审核</h1>
+                    </div><!-- /.page-header -->
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="pagination-right">
+                                <?php echo $app->themePager($list['pager'],$app->request->getUriForPath('/application/verify'));?>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead class="thead-heading">
+                                    <tr>
+										<th>&nbsp;</th>
+										<th>申请人</th>
+                                        <th>应用类型</th>
+                                        <th>名称</th>
+                                        <th>邮箱</th>
+                                        <th>电话</th>
+										<th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($list['data'] as $k=>$data):?>
+                                    <tr>
+                                        <td>&nbsp;</td>
+										<td><?php echo $data->username;?></td>
+                                        <td><?php echo ($data->type==1)?'开发者':'测试者';?></td>
+                                        <td><?php echo $data->name;?></td>                                      
+                                        <td><?php echo $data->email;?></td>
+                                        <td><?php echo $data->phone;?></td>
+                                        <td>
+											<a href='/application/verify/edit/<?php echo $data->id;?>' class=" btn-default btn-sm"><i class="fa fa-pencil-square-o"></i>  详情</a>
+										</td>
+                                    </tr>
+                                    <?php endforeach;?>
+                                </tbody>
+                                
+                                <thead class="thead-heading">
+                                    <tr>
+                                        <th colspan="8" style="text-align:center;">
+                                         <?php echo $app->themePager($list['pager'],$app->request->getUriForPath('/application/verify'));?>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>                        
+                    </div>
+
+                </div>
+            
+            </div>
+            
+            <div class="clearfix"></div>
+        </div>       
+        <?php require_once 'footer.html';?>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<?php require_once 'common.html';?>
+    <title>我的应用</title>
+</head>
+<body>
+<?php require_once 'header.html';?>
+        <div class="wrap">
+        <?php require_once 'admin-sidebar.html';?>
+
+            <div class="main-content">
+            
+                <div class="page-content">
+                    
+                    <div class="page-header">
+                        <h1>我的应用</h1>
+                    </div><!-- /.page-header -->
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="/application/add" class="btn btn-btn btn-add">申请应用</a>
+                            <div class="pagination-right">
+                                <?php echo $app->themePager($list['pager'],$app->request->getUriForPath('/application/search'));?>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead class="thead-heading">
+                                    <tr>
+										<th>&nbsp;</th>
+                                        <th>应用类型</th>
+                                        <th>名称</th>
+                                        <th>邮箱</th>
+                                        <th>电话</th>
+                                        <th>APPID</th>
+                                        <th>状态</th>
+										<th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($list['data'] as $k=>$data):?>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td><?php echo ($data->type==1)?'开发者':'测试';?></td>
+                                        <td><?php echo $data->name;?></td>                                      
+                                        <td><?php echo $data->email;?></td>
+                                        <td><?php echo $data->phone;?></td>
+                                        <td><?php echo $data->appid;?></td>
+										<td><?php 
+											switch($data->status) {
+												case '0':echo '申请中';break;
+												case '1':echo '通过';break;
+												case '4':echo '未通过';break;
+												default: break;
+											}
+										?></td>
+                                        <td>
+											 <a href='/application/edit/<?php echo $data->id;?>' class=" btn-default btn-sm"><i class="fa fa-pencil-square-o"></i>  编辑</a>
+										</td>
+                                    </tr>
+                                    <?php endforeach;?>
+                                </tbody>
+                                
+                                <thead class="thead-heading">
+                                    <tr>
+                                        <th colspan="8" style="text-align:center;">
+                                         <?php echo $app->themePager($list['pager'],$app->request->getUriForPath('/application/search'));?>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>                        
+                    </div>
+
+                </div>
+            
+            </div>
+            
+            <div class="clearfix"></div>
+        </div>       
+        <?php require_once 'footer.html';?>

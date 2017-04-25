@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新增邮箱账号</title>
+<?php require_once 'common.html';?>
+</head>
+<body>
+<?php require_once 'header.html';?>
+        <div class="wrap">
+        <?php require_once 'admin-sidebar.html';?>
+            <div class="main-content">
+            
+                <div class="page-content">
+                    
+                    <div class="page-header">
+                        <h1>新增邮箱账号</h1>
+                    </div><!-- /.page-header -->
+                    
+                    <div class="form-horizontal">
+                        <form method="post" action="/mail/setting/add" id="mail-add">
+                            <?php $nownumber = empty($mails)?0:count($mails);?>
+                            <input type="hidden" name="field_user_mail[<?php echo $nownumber;?>][name]" value="<?php echo "mail".($maxid+1);?>">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">Smtp地址</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="text" id="host" name="field_user_mail[<?php echo $nownumber;?>][host]" class="form-control" placeholder="stmp.163.com" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">账号</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="text" id="name" name="field_user_mail[<?php echo $nownumber;?>][username]" class="form-control" placeholder="user@mail.com" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">密码</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="password" id="password" name="field_user_mail[<?php echo $nownumber;?>][password]" class="form-control" placeholder="密码" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">From</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="text" name="field_user_mail[<?php echo $nownumber;?>][from]" class="form-control" placeholder="user@mail.com" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">Fromname</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="text" name="field_user_mail[<?php echo $nownumber;?>][fromname]" class="form-control" placeholder="贝螺网络科技" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">SMTPSecure</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="text" name="field_user_mail[<?php echo $nownumber;?>][options][smtpsecure]" class="form-control" placeholder="ssl/tls" value="ssl"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right">端口</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group col-sm-9">
+                                        <input type="text" name="field_user_mail[<?php echo $nownumber;?>][options][port]" class="form-control" placeholder="25" value="25"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix form-actions">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="button" class="btn btn-btn mail-add">
+                                        <i class="fa fa-check"></i>
+                                        提 交
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!-- /.form-horizontal -->
+
+                </div>
+            
+            </div>
+            
+            <div class="clearfix"></div>
+        </div>
+        
+        <?php require_once 'footer.html';?>
+
+        <script type="text/javascript">
+            $(function(){
+                $(".mail-add").click(function(){
+                    var host = $("#host").val();
+                    var name = $("#name").val();
+                    var password = $("#password").val();
+                    if(host=='') {
+                        alert('smtp 地址必须填写');
+                    }
+                    if(name=='') {
+                        alert('账号必须填写');
+                    }
+                    if(password=='') {
+                        alert('密码必须填写');
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "/mail/setting/add",
+                        data: $("#mail-add").serialize(),
+                        dataType: "json",
+                        success: function(data){
+                          if (data.status=="success") {
+                              location.href="/mail/setting";
+                          } else {
+                             alert(data.msg);
+                             return false;
+                          }
+                        }
+                    });
+                });
+            });
+        </script>
